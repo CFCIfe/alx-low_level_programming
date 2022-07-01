@@ -3,7 +3,8 @@
  * main - This is a description
  * Return: a number 1 if successful
  */
-int main()
+int main(void)
 {
 	write(1, "and that piece of art is useful\" - Dora Korpar, 2015-10-19\n", 30);
+	return 1;
 }
