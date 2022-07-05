@@ -10,7 +10,7 @@
 
 int main(void)
 {
-	_putchar("_putchar");
-	_putchar('\n');
+	printf("_putchar");
+	printf("\n");
 	return (0);
 }
