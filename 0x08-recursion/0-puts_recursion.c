@@ -1,20 +1,13 @@
-#include <stdio.h>
+#include "main.h"
 
 void _puts_recursion(char *s)
 {
     if (*s == '\0')
     {
-        printf("\n");
+        _putchar("\n");
         return;
     }
 
-    printf("%c", *s);
+    _putchar(*s);
     _puts_recursion(s + 1);
-}
-
-int main()
-{
-    char str[] = "Hello, World!";
-    _puts_recursion(str);
-    return 0;
 }
