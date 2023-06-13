@@ -3,3 +3,6 @@
 !*.*
 *main.c
 .vscode/
+/0x09-static_libraries/*.o
+/0x09-static_libraries/*.c
+compile.sh
