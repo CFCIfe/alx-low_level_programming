@@ -1,129 +1,154 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * _isdigit - Checks if a character is a digit.
- * @c: The character to be checked.
- *
- * Return: 1 if c is a digit, 0 otherwise.
- */
-int _isdigit(int c)
+ * _atoi_digit - convert a char to integer.
+ * @x: character to convert.
+ * Return: integer.
+ **/
+int _atoi_digit(char x)
 {
-return (c >= '0' && c <= '9');
+unsigned int res;
+
+if (x <= '9' && x >= '0')
+res = x - '0';
+return (res);
 }
 
 /**
- * multiply - Multiplies two numbers represented as strings.
- * @num1: The first number.
- * @num2: The second number.
- *
- * Return: Pointer to the result (product) as a string.
- */
-char *multiply(char *num1, char *num2)
+ * _isNumber - Define if a string is a number.
+ * @argv: Pointer to string.
+ * Return: success (0).
+ **/
+int _isNumber(char *argv)
 {
-int len1 = 0, len2 = 0, i, j, prod_len;
-int *result, carry, n1, n2, sum;
-char *product;
+int i;
 
-while (num1[len1])
-len1++;
-while (num2[len2])
-len2++;
+for (i = 0; argv[i]; i++)
+if (argv[i] < '0' || argv[i] > '9')
+return (1);
+return (0);
+}
 
-prod_len = len1 + len2;
-result = calloc(prod_len, sizeof(int));
-if (result == NULL)
+/**
+* _calloc - allocate array of size * nmemb.
+* @nmemb: number of elements.
+* @size: size of element.
+* Return: pointer to array.
+**/
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+char *tab;
+unsigned int i;
+
+tab = malloc(size * nmemb);
+
+if (tab == NULL)
 return (NULL);
 
+for (i = 0; i < nmemb; i++)
+tab[i] = '0';
+
+return (tab);
+}
+
+/**
+* mul_array - multiply two arrays.
+* @a1: first array.
+* @len1: length of array a1.
+* @a2:  char.
+* @a3: array for result.
+* @lena: length of array a3.
+* Return: pointer to array.
+**/
+void *mul_array(char *a1, int len1, char a2, char *a3, int lena)
+{
+int mul = 0, i, k;
+
+k = lena;
 for (i = len1 - 1; i >= 0; i--)
 {
-n1 = num1[i] - '0';
-carry = 0;
+mul += (a1[i] - '0') * (a2 - '0') + (a3[k] - '0');
+a3[k] = (mul % 10) + '0';
+mul /= 10;
+k--;
+}
 
-for (j = len2 - 1; j >= 0; j--)
+while (mul != 0)
 {
-n2 = num2[j] - '0';
-sum = n1 * n2 + result[i + j + 1] + carry;
-result[i + j + 1] = sum % 10;
-carry = sum / 10;
+mul += a3[k] - '0';
+a3[k] = (mul % 10) + '0';
+mul /= 10;
+k--;
 }
 
-if (carry > 0)
-result[i + j + 1] += carry;
-}
-
-while (*result == 0 && prod_len > 1)
-{
-result++;
-prod_len--;
-}
-
-product = malloc((prod_len + 1) * sizeof(char));
-if (product == NULL)
-{
-free(result);
-return (NULL);
-}
-
-for (i = 0; i < prod_len; i++)
-product[i] = result[i] + '0';
-
-product[i] = '\0';
-free(result);
-
-return (product);
+return (a3);
 }
 
 /**
-* main - Entry point. Multiplies two positive numbers.
-* @argc: The number of command-line arguments.
-* @argv: An array of command-line argument strings.
-*
-* Return: 0 if success, 98 if error.
-*/
+* print_array - print all digits of array.
+* @nb: number of elements to print.
+* @a: array of elements.
+**/
+void print_array(char *a, int nb)
+{
+int i = 0;
+
+while (a[i] == '0' && (i + 1) < nb)
+{
+i++;
+}
+for (; i < nb; i++)
+{
+_putchar(a[i]);
+}
+_putchar('\n');
+}
+
+/**
+* main - print the multiplication of 2 numbers.
+* @argc: array length.
+* @argv: array.
+* Return: 0.
+**/
 int main(int argc, char *argv[])
 {
-char *num1, *num2, *product;
+int i, c, len1, len2, lenres;
+char E[6] = {'E', 'r', 'r', 'o', 'r', '\n'};
+char *tabres;
 
-if (argc != 3)
+if (argc != 3 || _isNumber(argv[1]) == 1 || _isNumber(argv[2]) == 1)
 {
-printf("Error\n");
-return (98);
+for (i = 0; i < 6; i++)
+{
+_putchar(E[i]);
+}
+exit(98);
 }
 
-num1 = argv[1];
-num2 = argv[2];
+len1 = 0;
+while (argv[1][len1])
+len1++;
 
-while (*num1)
-{
-if (!_isdigit(*num1))
-{
-printf("Error\n");
-return (98);
-}
-num1++;
-}
+len2 = 0;
+while (argv[2][len2])
+len2++;
 
-while (*num2)
+lenres = len1 + len2;
+tabres = _calloc(lenres + 1, sizeof(char));
+if (tabres == NULL)
 {
-if (!_isdigit(*num2))
-{
-printf("Error\n");
-return (98);
-}
-num2++;
-}
-
-product = multiply(argv[1], argv[2]);
-if (product == NULL)
-{
-printf("Error\n");
-return (98);
-}
-
-printf("%s\n", product);
-free(product);
-
+free(tabres);
 return (0);
+}
+
+for (i = len2 - 1, c = 0; i >= 0; i--)
+{
+tabres = mul_array(argv[1], len1, argv[2][i], tabres, (lenres - 1 - c));
+c++;
+}
+
+print_array(tabres, lenres);
+free(tabres);
+exit(EXIT_SUCCESS);
 }
