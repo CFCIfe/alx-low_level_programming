@@ -27,7 +27,7 @@ new_dog->name = new_name;
 new_dog->age = age;
 new_dog->owner = new_owner;
 
-return new_dog;
+return (new_dog);
 }
 else
 {
@@ -36,5 +36,5 @@ free(new_owner);
 free(new_dog);
 }
 }
-return NULL;
+return (NULL);
 }
