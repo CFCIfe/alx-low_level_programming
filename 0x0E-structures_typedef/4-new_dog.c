@@ -1,3 +1,14 @@
+#include <stdlib.h>
+#include "dog.h"
+
+/**
+ * new_dog - Creates a new dog structure
+ * @name: Pointer to a string representing the dog's name
+ * @age: Age of the dog
+ * @owner: Pointer to a string representing the owner's name
+ *
+ * Return: Pointer to the newly created dog structure
+ */
 dog_t *new_dog(char *name, float age, char *owner)
 {
 dog_t *new_dog = malloc(sizeof(dog_t));
