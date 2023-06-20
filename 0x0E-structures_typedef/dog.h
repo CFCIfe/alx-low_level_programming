@@ -32,6 +32,7 @@ void init_dog(struct dog *d, char *name, float age, char *owner);
 
 /**
  * dog_t - Typedef for struct dog
+ * @d: Pointer to the struct dog variable to initialize
  */
 void print_dog(struct dog *d);
 typedef struct dog dog_t;
