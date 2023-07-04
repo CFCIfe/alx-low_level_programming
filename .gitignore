@@ -6,3 +6,4 @@
 /0x09-static_libraries/*.c
 compile.sh
 _putchar.c
+0x12-singly_linked_lists/*-main.c
