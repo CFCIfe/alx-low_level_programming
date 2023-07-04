@@ -15,7 +15,10 @@ size_t count = 0;
 
 while (h != NULL)
 {
-if (h->str == NULL)
+unsigned int len = h->len;
+char *str = h->str;
+
+if (str == NULL)
 {
 _putchar('[');
 _putchar('0');
@@ -26,13 +29,9 @@ _putchar('n');
 _putchar('i');
 _putchar('l');
 _putchar(')');
-_putchar('\n');
 }
 else
 {
-unsigned int len = h->len;
-char *str = h->str;
-
 _putchar('[');
 while (len / 10)
 {
@@ -42,13 +41,10 @@ len /= 10;
 _putchar(len + '0');
 _putchar(']');
 _putchar(' ');
-_putchar(str[0]);
-_putchar(str[1]);
-_putchar(str[2]);
-_putchar(str[3]);
-_putchar(str[4]);
-_putchar('\n');
+for (unsigned int i = 0; i < 5 && str[i] != '\0'; i++)
+_putchar(str[i]);
 }
+_putchar('\n');
 
 h = h->next;
 count++;
