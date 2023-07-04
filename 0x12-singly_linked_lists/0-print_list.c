@@ -1,7 +1,7 @@
 #include <stddef.h>
+#include <stdio.h>
 #include "lists.h"
-
-int _putchar(char c);
+#include <string.h>
 
 /**
  * print_list - Prints all the elements of a list_t list.
@@ -15,36 +15,10 @@ size_t count = 0;
 
 while (h != NULL)
 {
-unsigned int len = h->len;
-char *str = h->str;
-
-if (str == NULL)
-{
-_putchar('[');
-_putchar('0');
-_putchar(']');
-_putchar(' ');
-_putchar('(');
-_putchar('n');
-_putchar('i');
-_putchar('l');
-_putchar(')');
-}
+if (h->str == NULL)
+printf("[0] (nil)\n");
 else
-{
-_putchar('[');
-while (len / 10)
-{
-_putchar(len % 10 + '0');
-len /= 10;
-}
-_putchar(len + '0');
-_putchar(']');
-_putchar(' ');
-for (unsigned int i = 0; i < 5 && str[i] != '\0'; i++)
-_putchar(str[i]);
-}
-_putchar('\n');
+printf("[%lu] %s\n", strlen(h->str), h->str);
 
 h = h->next;
 count++;
