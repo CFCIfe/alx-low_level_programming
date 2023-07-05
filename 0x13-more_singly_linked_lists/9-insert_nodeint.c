@@ -18,7 +18,6 @@ unsigned int i;
 if (head == NULL)
 return (NULL);
 
-/* Special case: insert at index 0 */
 if (idx == 0)
 {
 new_node = malloc(sizeof(listint_t));
@@ -33,17 +32,14 @@ return (new_node);
 
 current = *head;
 
-/* Traverse the list until reaching the position or the end of the list */
 for (i = 0; i < idx - 1 && current != NULL; i++)
 {
 current = current->next;
 }
 
-/* Check if the position is out of bounds */
 if (current == NULL)
 return (NULL);
 
-/* Create the new node */
 new_node = malloc(sizeof(listint_t));
 if (new_node == NULL)
 return (NULL);
