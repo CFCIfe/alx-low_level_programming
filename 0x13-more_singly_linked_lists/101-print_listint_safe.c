@@ -15,36 +15,39 @@ size_t count = 0;
 if (head == NULL)
 return (0);
 slow = head;
-fast = head->next;
-while (fast != NULL && fast->next != NULL)
+fast = head;
+while (slow != NULL && fast != NULL && fast->next != NULL)
 {
-if (slow == fast)
-break;
-printf("[%p] %d\n", (void *)slow, slow->n);
-count++;
 slow = slow->next;
 fast = fast->next->next;
+if (slow == fast)
+break;
 }
 if (slow == fast)
 {
 loop = slow;
 count++;
-}
-else
+slow = head;
+while (slow != fast)
 {
 printf("[%p] %d\n", (void *)slow, slow->n);
 count++;
-return (count);
+slow = slow->next;
+fast = fast->next;
 }
+printf("[%p] %d\n", (void *)slow, slow->n);
+printf("-> [%p] %d\n", (void *)loop, loop->n);
+count++;
+}
+else
+{
 slow = head;
-while (slow != loop)
+while (slow != NULL)
 {
 printf("[%p] %d\n", (void *)slow, slow->n);
 count++;
 slow = slow->next;
 }
-printf("[%p] %d\n", (void *)slow, slow->n);
-printf("-> [%p] %d\n", (void *)loop, loop->n);
-count++;
+}
 return (count);
 }
