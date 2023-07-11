@@ -12,21 +12,18 @@ void copy_file(const char *src_file, const char *dest_file)
 {
 int src_fd, dest_fd, read_size;
 char buffer[1024];
-
 src_fd = open(src_file, O_RDONLY);
 if (!src_file || src_fd == -1)
 {
 dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", src_file);
 exit(98);
 }
-
 dest_fd = open(dest_file, O_CREAT | O_WRONLY | O_TRUNC, 0664);
 if (dest_fd == -1)
 {
 dprintf(STDERR_FILENO, "Error: Can't write to %s\n", dest_file);
 exit(99);
 }
-
 while ((read_size = read(src_fd, buffer, 1024)) > 0)
 {
 if (write(dest_fd, buffer, read_size) != read_size)
@@ -35,19 +32,16 @@ dprintf(STDERR_FILENO, "Error: Can't write to %s\n", dest_file);
 exit(99);
 }
 }
-
 if (read_size == -1)
 {
 dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", src_file);
 exit(98);
 }
-
 if (close(src_fd) == -1)
 {
 dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", src_fd);
 exit(100);
 }
-
 if (close(dest_fd) == -1)
 {
 dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", dest_fd);
