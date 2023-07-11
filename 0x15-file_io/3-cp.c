@@ -6,7 +6,7 @@
  * error_exit - Print error message to stderr and exit with specified code
  * @code: The exit code
  * @message: The error message to print
- * @filename: The name of the file related to the error
+ * @filename: The name of the file
  */
 void error_exit(int code, const char *message, const char *filename)
 {
